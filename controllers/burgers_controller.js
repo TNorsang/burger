@@ -1,17 +1,13 @@
-// require in express, and set up routing for it, and bring in
-// the burger.js model file
+
 var express = require('express');
 var router = express.Router();
 var burger = require('../models/burger.js');
 
-// add a '/' endpoint that redirects to the /index route
+// redirects to index or main
 router.get('/', function(req, res) {
 	res.redirect('/index');
 });
 
-// add a '/index/' endpoint that gets all the burgers
-// then renders the index file by passing in all the burgers
-// as an object for handlebars to use
 router.get('/index', function(req, res) {
 	burger.selectAll(function(data) {
 		var hbsObject = {burgers: data};

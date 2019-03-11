@@ -1,7 +1,7 @@
-// import in the connection to the database
+// connecting to the database
 var connection = require('../config/connection.js');
 
-// a function that will be used to build queries
+// building querie
 function printQuestionMarks(num) {
 	var arr = [];
 
@@ -12,7 +12,7 @@ function printQuestionMarks(num) {
 	return arr.toString();
 }
 
-// another function for building queries
+// building queries
 function objToSql(ob) {
 	var arr = [];
 
@@ -25,9 +25,9 @@ function objToSql(ob) {
 	return arr.toString();
 }
 
-// define our orm that will be exported to the burgers.js model
+
 var orm = {
-	// selectAll function for grabbing everything from the table
+	// grabs everything from table
 	selectAll: function(tableInput, cb) {
 		var queryString = 'SELECT * FROM ' + tableInput + ';';
 		connection.query(queryString, function(err, result) {
@@ -36,7 +36,7 @@ var orm = {
 			cb(result);
 		});
 	},
-	// insertOne function for inserting one burger into table
+	// insert one burget table
 	insertOne: function(table, cols, vals, cb) {
 		var queryString = 'INSERT INTO ' + table;
 
@@ -44,7 +44,7 @@ var orm = {
 		queryString += cols.toString();
 		queryString += ') ';
 		queryString += 'VALUES (';
-		// queryString += vals[0] + ' , ' + vals[1];
+		
 		queryString += printQuestionMarks(vals.length);
 		queryString += ') ';
 
@@ -53,12 +53,12 @@ var orm = {
 
 		connection.query(queryString, vals, function(err, result) {
 			if (err) throw err;
-			// send the query result back to the callback function
+			
 			cb(result);
 		});
 	},
 
-	// update one function for changing a burger status
+	
 	updateOne: function(table, objColVals, condition, cb) {
 		var queryString = 'UPDATE ' + table;
 
@@ -71,11 +71,11 @@ var orm = {
 
 		connection.query(queryString, function(err, result) {
 			if (err) throw err;
-			// send the query result back to the callback function
+		
 			cb(result);
 		});
 	}
 };
 
-// export the orm back to the model burger.js
+
 module.exports = orm;
