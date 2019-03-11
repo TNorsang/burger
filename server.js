@@ -7,7 +7,6 @@ var app = express();
 var methodOverride = require('method-override');
 var bodyParser = require('body-parser');
 
-/
 app.use(express.static(__dirname + '/public'));
 
 
